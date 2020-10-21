@@ -1,12 +1,15 @@
 library(pacman)
 pacman::p_load(dataRetrieval, dplyr, tidyverse, leaflet)
 
-q_downloader <- function(site_no = sites){
-  df <- readNWISdv(site_no,
-                   parameterCd = '00060') %>%
-    rename(q_cfs = X_00060_00003,
-           q_cd = X_00060_00003_cd) %>%
-  return(df)
+Qak <- readNWISdata(stateCd="AK", parameterCd="00060", service="dv")
+sites <- select(Qak, site_no)
+for(i in 1:507){
+  Station <- readNWISdv(sites[i,],
+                   parameterCd = '00060')
+  write.csv(Station, paste0(i,".csv"))
 }
 
-Qakf <- q_downloader(site_no = 'sites')
+data1 <- read.csv("./Data/90.csv", header=TRUE)%>%
+  mutate(Date=as.POSIXct(Date,tz="Alaska time"))
+first(data1$Date)
+last(data1$Date)
