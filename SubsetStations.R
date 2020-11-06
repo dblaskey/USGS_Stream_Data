@@ -1,22 +1,8 @@
 library(pacman)
 pacman::p_load(dataRetrieval, tidyverse)
 
-sites <- dataset
-
-#Summarize data
-Summarized_data <- sites %>%
-  group_by(site_no) %>%
-  summarise(start_date = min(Date), end_date=max(Date), observations=max(X))
-
-Summarized_data <- Summarized_data %>%
-  mutate(end_date=as.POSIXct(end_date)) %>%
-  mutate(start_date=as.POSIXct(start_date)) %>%
-  mutate(Record_length = (end_date - start_date)/365.25) %>%
-  mutate(Completeness = (observations/365.25)/as.double(Record_length)) %>%
-  mutate(Effective_obs = Completeness*Record_length)
-
 #Arrange for monthly and annual analysis
-sites2 <- separate(sites, "Date", c("Year", "Month", "Day"), sep = "-")
+sites2 <- separate(final_sites, "Date", c("Year", "Month", "Day"), sep = "-")
 
 #Create table of observations per month
 obsy <- sites2 %>%
