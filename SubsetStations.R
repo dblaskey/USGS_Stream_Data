@@ -56,3 +56,24 @@ flashiness <- flash %>%
   summarise(sum_dq = sum(dq, na.rm=TRUE), sum_q = sum(X_00060_00003)) %>%
   mutate(dq_q = ifelse(sum_q>0, sum_dq/sum_q, NA))
 
+#Winter Discharge
+winter <- final %>%
+  group_by(site_no) %>%
+  filter(3>=as.numeric(Month))
+
+wd_criteria <- 75
+
+wd <- winter %>%
+  count(site_no, Year) %>%
+  filter(n<wd_criteria)
+
+winter_discharge <- anti_join(winter, wd) %>%
+  group_by(site_no, Year) %>%
+  summarise(Winter_Discharge = mean(X_00060_00003))
+
+#Peak Flow
+
+#Freeze Up
+
+#Ressesions 
+
