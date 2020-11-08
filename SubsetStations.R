@@ -1,5 +1,5 @@
 library(pacman)
-pacman::p_load(dataRetrieval, tidyverse)
+pacman::p_load(dataRetrieval, tidyverse, zoo)
 
 #Arrange for monthly and annual analysis
 sites2 <- separate(final_sites, "Date", c("Year", "Month", "Day"), sep = "-")
@@ -57,7 +57,7 @@ flashiness <- flash %>%
   mutate(dq_q = ifelse(sum_q>0, sum_dq/sum_q, NA))
 
 #Winter Discharge
-winter <- final %>%
+winter <- sites2 %>%
   group_by(site_no) %>%
   filter(3>=as.numeric(Month))
 
@@ -72,8 +72,15 @@ winter_discharge <- anti_join(winter, wd) %>%
   summarise(Winter_Discharge = mean(X_00060_00003))
 
 #Peak Flow
+ave_criteria <- 10
 
+peak_flow <- final %>%
+  group_by(site_no, Year) %>%
+  mutate(ave_q = rollapply(X_00060_00003,  FUN = mean, width = ave_criteria, fill = NA, align = "center")) %>%
+  filter(ave_q == max(ave_q, na.rm = TRUE)) 
+  
 #Freeze Up
+
 
 #Ressesions 
 
