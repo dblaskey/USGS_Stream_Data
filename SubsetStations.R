@@ -77,7 +77,7 @@ ave_criteria <- 10
 peak_flow <- final %>%
   group_by(site_no, Year) %>%
   mutate(ave_q = rollapply(X_00060_00003,  FUN = mean, width = ave_criteria, fill = NA, align = "center")) %>%
-  filter(ave_q == max(ave_q, na.rm = TRUE)) 
+  filter(ave_q>0 & ave_q == max(ave_q, na.rm = TRUE)) 
   
 #Freeze Up
 
