@@ -77,10 +77,18 @@ ave_criteria <- 10
 peak_flow <- final %>%
   group_by(site_no, Year) %>%
   mutate(ave_q = rollapply(X_00060_00003,  FUN = mean, width = ave_criteria, fill = NA, align = "center")) %>%
-  filter(ave_q>0 & ave_q == max(ave_q, na.rm = TRUE)) 
+  filter(ave_q>0 & ave_q == max(ave_q, na.rm = TRUE)) %>%
+  slice(1)
   
 #Freeze Up
-
+wy_final <- final %>%
+  mutate(WaterPeriod = ifelse(as.numeric(Month)>=10, as.numeric(Year) + 1, as.numeric(Year)))
+  
+freeze_up <- wy_final %>%
+  mutate(date = as.Date(date)) %>%
+  group_by(site_no, WaterPeriod, X_00060_00003_cd) %>%
+  filter(X_00060_00003_cd == "A e") %>%
+  slice(1)
 
 #Ressesions 
 
