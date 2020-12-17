@@ -17,8 +17,11 @@ for(i in 1:nsites){
     sites <- rbind(sites,temp)
 }
 
+#For local use only: DO NOT PUBLISH
+load(file="sites.Rdata")
+
 #Set criteria for passing
-year_length <- 20
+year_length <- 30
 complete_record <- 0.9
 
 #Summarize data

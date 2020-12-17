@@ -52,9 +52,9 @@ data_AK_final <- semi_join(data_AK, final, by="site_no")%>%
   select(site_no, station_nm, dec_lat_va, dec_long_va)
 
 #Not needed right now
-final <- full_join(data_AK,final, by="site_no") %>%
-  select(site_no, station_nm, dec_lat_va, dec_long_va, Year, Month, Day, X_00060_00003, wt_year, date) %>%
-  drop_na()
+#final <- full_join(data_AK,final, by="site_no") %>%
+  #select(site_no, station_nm, dec_lat_va, dec_long_va, Year, Month, Day, X_00060_00003, wt_year, date) %>%
+  #drop_na()
 
 #Plot locations
 ak <- map_data('worldHires','USA:Alaska')
@@ -89,7 +89,7 @@ qy_stat <- qy %>%
   mutate(MK_yearp=MKtest_year$sl, MK_yearsig=ifelse(MK_yearp<=p_val,"Significant","Not Significant"))
 
 qm_stat <- qm %>%
-  group_by(site_no) %>% 
+  group_by(site_no, Month) %>% 
   do(MKtest_month=MannKendall(.$Monthly_Discharge)) %>%
   mutate(MK_monthp=MKtest_month$sl, MK_monthsig=ifelse(MK_monthp<=p_val,"Significant","Not Significant")) 
 
@@ -99,11 +99,11 @@ qm_stat <- qm %>%
  # do(Sptest=partial.cor.trend.test(qm$Monthly_Discharge,1:length(qm$Monthly_Discharge), "spearman")) %>%
   #mutate(Sp_p=Sptest$p.value, Sp_sig=ifelse(Sp_p<=p_val,1,0))
 
+data_AK_final_monthly <- full_join(data_AK_final, qm_stat) %>%
+  select(-MKtest_month)
+
 data_AK_final <- full_join(data_AK_final, qy_stat) %>%
   select(-MKtest_year)
-
-data_AK_final <- full_join(data_AK_final, qm_stat) %>%
-  select(-MKtest_month)
 
 #qm_lm <- qm %>%
  # mutate(fulldate=as.yearmon(paste(wt_year, Month), "%Y %m")) %>%
@@ -214,11 +214,6 @@ ggplot() +
 
 ggplot() + 
   geom_polygon(data=ak, aes(long, lat, group=group), fill="white", color="black") +
-  geom_point(data=data_AK_final, aes(x=dec_long_va, y=dec_lat_va, color=factor(MK_monthsig))) +
-  labs(title="Significant Change in Monthly Discharge", color=" ")
-
-ggplot() + 
-  geom_polygon(data=ak, aes(long, lat, group=group), fill="white", color="black") +
   geom_point(data=data_AK_final, aes(x=dec_long_va, y=dec_lat_va, color=factor(Mk_flash_sig))) +
   labs(title="Significant Change in Flashiness", color=" ")
 
@@ -231,3 +226,14 @@ ggplot() +
   geom_polygon(data=ak, aes(long, lat, group=group), fill="white", color="black") +
   geom_point(data=data_AK_final, aes(x=dec_long_va, y=dec_lat_va, color=factor(MK_PF_sig))) +
   labs(title="Significant Change in Peak Flow", color=" ")
+
+
+for (i in 1:12){
+  temp <- data_AK_final_monthly %>% 
+    filter(as.numeric(Month)==i)
+  
+  ggplot() + 
+         geom_polygon(data=ak, aes(long, lat, group=group), fill="white", color="black") +
+         geom_point(data=temp, aes(x=dec_long_va, y=dec_lat_va, color=factor(MK_monthsig))) +
+         labs(title=paste0("Significant Monthly Discharge Change for Month Number ", i), color=" ")
+  }
