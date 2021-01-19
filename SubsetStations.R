@@ -1,5 +1,5 @@
 library(pacman)
-pacman::p_load(dataRetrieval, sf, tidyverse, zoo, lfstat, Kendall, lubridate, rnaturalearthdata, mapdata, trend, forecast, tstools)
+pacman::p_load(dataRetrieval, sf, tidyverse, zoo, lfstat, Kendall, lubridate, rnaturalearthdata, mapdata, trend, forecast, tstools, mblm)
 
 #Arrange for monthly and annual analysis
 sites2 <- separate(final_sites, "Date", c("Year", "Month", "Day"), sep = "-")
@@ -42,7 +42,8 @@ fail <- pass_year %>%
 
 #Remove lines that fail criteria
 final <- anti_join(sites2,fail) %>%
-  mutate(date=as.POSIXct(paste(Year, Month, Day, sep="-")))
+  mutate(date=as.POSIXct(paste(Year, Month, Day, sep="-")), 
+         wt_year=ifelse(as.numeric(Month)>=10, as.numeric(Year) + 1, as.numeric(Year))) 
 
 #Pull Geo Locations
 data_AK <- whatNWISdata(stateCd="AK", parameterCd="00060") %>%
@@ -50,11 +51,6 @@ data_AK <- whatNWISdata(stateCd="AK", parameterCd="00060") %>%
 
 data_AK_final <- semi_join(data_AK, final, by="site_no")%>%
   select(site_no, station_nm, dec_lat_va, dec_long_va)
-
-#Not needed right now
-#final <- full_join(data_AK,final, by="site_no") %>%
-  #select(site_no, station_nm, dec_lat_va, dec_long_va, Year, Month, Day, X_00060_00003, wt_year, date) %>%
-  #drop_na()
 
 #Plot locations
 ak <- map_data('worldHires','USA:Alaska')
@@ -93,11 +89,17 @@ qm_stat <- qm %>%
   do(MKtest_month=MannKendall(.$Monthly_Discharge)) %>%
   mutate(MK_monthp=MKtest_month$sl, MK_monthsig=ifelse(MK_monthp<=p_val,"Significant","Not Significant")) 
 
-#Spearman Test
-#qm_stat2 <- qm %>%
- # group_by(site_no) %>% 
- # do(Sptest=partial.cor.trend.test(qm$Monthly_Discharge,1:length(qm$Monthly_Discharge), "spearman")) %>%
-  #mutate(Sp_p=Sptest$p.value, Sp_sig=ifelse(Sp_p<=p_val,1,0))
+qy_stat2 <- qy %>%
+  group_by(site_no) %>%
+  drop_na() %>%
+  mutate(Year=as.numeric(Year)) %>%
+  do(TSqy=mblm(Annual_Discharge ~ Year, .)) %>%
+  mutate(qy_Slope=TSqy$coefficients[2])
+
+qy_stat3 <- qy %>%
+  group_by(site_no) %>%
+  drop_na() %>%
+  summarise(QAve=mean(Annual_Discharge))
 
 data_AK_final_monthly <- full_join(data_AK_final, qm_stat) %>%
   select(-MKtest_month)
@@ -105,9 +107,11 @@ data_AK_final_monthly <- full_join(data_AK_final, qm_stat) %>%
 data_AK_final <- full_join(data_AK_final, qy_stat) %>%
   select(-MKtest_year)
 
-#qm_lm <- qm %>%
- # mutate(fulldate=as.yearmon(paste(wt_year, Month), "%Y %m")) %>%
-  #cmav()
+data_AK_final <- full_join(data_AK_final, qy_stat2) %>%
+  select(-TSqy)
+
+data_AK_final <- full_join(data_AK_final, qy_stat3) %>%
+  mutate(Percent_change=SigQ/QAve)
 
 #Flashiness
 flash <- final %>%
@@ -125,8 +129,18 @@ flashiness_stat <- flashiness %>%
   do(MKflashtest=MannKendall(.$dq_q)) %>%
   mutate(MK_flash_p=MKflashtest$sl, Mk_flash_sig=ifelse(MK_flash_p<=p_val,"Significant","Not Significant"))
 
+flashiness_stat2 <- flashiness %>%
+  group_by(site_no) %>%
+  drop_na() %>%
+  mutate(Year=as.numeric(Year)) %>%
+  do(TSflash_year=mblm(dq_q ~ Year, .)) %>%
+  mutate(Flash_Slope=TSflash_year$coefficients[2])
+
 data_AK_final <- full_join(data_AK_final, flashiness_stat) %>%
   select(-MKflashtest)
+
+data_AK_final <- full_join(data_AK_final, flashiness_stat2) %>%
+  select(-TSflash_year)
 
 #Winter Discharge
 winter <- sites2 %>%
@@ -149,8 +163,18 @@ WD_stat <- winter_discharge %>%
   do(MK_WD_test=MannKendall(.$Winter_Discharge)) %>%
   mutate(MK_WD_p=MK_WD_test$sl, MK_WD_sig=ifelse(MK_WD_p<=p_val,"Significant","Not Significant"))
 
+WD_stat2 <- winter_discharge %>%
+  group_by(site_no) %>%
+  drop_na() %>%
+  mutate(Year=as.numeric(Year)) %>%
+  do(WD_year=mblm(Winter_Discharge ~ Year, .)) %>%
+  mutate(WD_Slope=WD_year$coefficients[2])
+
 data_AK_final <- full_join(data_AK_final, WD_stat) %>%
   select(-MK_WD_test)
+
+data_AK_final <- full_join(data_AK_final, WD_stat2) %>%
+  select(-WD_year)
 
 #Peak Flow
 ave_criteria <- 10
@@ -159,7 +183,8 @@ peak_flow <- final %>%
   group_by(site_no, wt_year) %>%
   mutate(ave_q = rollapply(X_00060_00003,  FUN = mean, width = ave_criteria, fill = NA, align = "center")) %>%
   filter(ave_q>0 & ave_q == max(ave_q, na.rm = TRUE)) %>%
-  slice(1)
+  slice(1) %>%
+  mutate(jday = (as.integer(difftime(date,ymd(paste0(as.numeric(Year),'-01-01')), units = "days"))))
 
 #Peak Flow statistical analysis
 PF_stat <- peak_flow %>%
@@ -167,13 +192,23 @@ PF_stat <- peak_flow %>%
   do(MKPFtest=MannKendall(.$ave_q)) %>%
   mutate(MK_PF_p=MKPFtest$sl, MK_PF_sig=ifelse(MK_PF_p<=p_val,"Significant","Not Significant"))
 
+PF_stat2 <- peak_flow %>%
+  group_by(site_no) %>%
+  drop_na() %>%
+  do(PF_slope=mblm(ave_q ~ jday, .)) %>%
+  mutate(PF_Slope=PF_slope$coefficients[2])
+
 data_AK_final <- full_join(data_AK_final, PF_stat) %>%
   select(-MKPFtest)
 
-#Freeze Up (Need some work still)
+data_AK_final <- full_join(data_AK_final, PF_stat2) %>%
+  select(-PF_slope)
+
+#Freeze Up
 freeze_up <- final %>%
   mutate(date = as.Date(date)) %>%
-  mutate(wt_year = ifelse(as.numeric(Month)>=9, as.numeric(Year) + 1, as.numeric(Year)))%>%
+  mutate(wt_year = ifelse(as.numeric(Month)>=8, as.numeric(Year) + 1, as.numeric(Year)))%>%
+  filter(as.numeric(Month)>=8) %>%
   group_by(site_no, Year, X_00060_00003_cd) %>%
   filter(X_00060_00003_cd == "A e") %>%
   slice(1) %>%
@@ -182,28 +217,54 @@ freeze_up <- final %>%
 #Freeze Up statistical analysis
 FU_stat <- freeze_up %>%
   group_by(site_no) %>% 
-  do(test=MannKendall(.$wtr_day)) %>%
-  mutate(tau=test$tau,sl=test$sl,D=test$D, varS=test$varS, S=test$S, Sig=ifelse(sl<=p_val,1,0))
+  filter(n()>10) %>%
+  do(MKFUtest=MannKendall(.$wtr_day)) %>%
+  mutate(MK_FU_p=MKFUtest$sl, MK_FU_sig=ifelse(MK_FU_p<=p_val,"Significant","Not Significant"))
+
+FU_stat2 <- freeze_up %>%
+  group_by(site_no) %>%
+  drop_na() %>%
+  filter(n()>10) %>%
+  mutate(wt_year=as.numeric(wt_year), wtr_day=as.numeric(wtr_day)) %>%
+  do(FU=mblm(wtr_day~wt_year, .)) %>%
+  mutate(FU_Slope=FU$coefficients[2])
+
+data_AK_final <- full_join(data_AK_final, FU_stat) %>%
+  select(-MKFUtest)
+
+data_AK_final <- full_join(data_AK_final, FU_stat2) %>%
+  select(-FU)
 
 #Ressesions
-ReFinal <- final %>%
-  rename(day = Day, month = Month, year = Year, flow = X_00060_00003) %>%
-  group_by(site_no, year) %>%
-  nest()
+#ReFinal <- final %>%
+  #rename(day = Day, month = Month, year = Year, flow = X_00060_00003) %>%
+  #group_by(site_no) %>%
+  #nest()
 
-RecessionsAnalysis <- wy_final %>%
-  group_by(site_no, year) %>%
-  summarise(annual_q = sum(X_00060_00003)) %>%
-  add_column(recess = NA)
+#RecessionsAnalysis <- final %>%
+  #group_by(site_no) %>%
+  #summarise(annual_q = sum(X_00060_00003)) %>%
+  #add_column(recess = NA)
 
-nobj <- nrow(ReFinal)
+#nobj <- nrow(ReFinal)
 
-for(i in 1:nobj){
-temp <- ReFinal[[3]][[i]] %>%
-createlfobj(temp, hyearstart = 10, baseflow = FALSE, meta = list())
+#for(i in 1:nobj){
+#temp <- ReFinal[[2]][[i]] %>%
+#createlfobj(temp, hyearstart = 10, baseflow = FALSE, meta = list())
 
-RecessionsAnalysis[[4]][[i]] <- recession(temp, method = "MRC", seglen = 7, threshold = 70, thresbreaks = "fixed", plotMRC = FALSE, na.rm = TRUE) 
-}
+#RecessionsAnalysis[[3]][[i]] <- recession(temp, method = "IRS", seglen = 7, threshold = 70, thresbreaks = "fixed", plotMRC = FALSE, na.rm = TRUE) 
+#}
+
+#For testing purposes only
+data_AK_final <- data_AK_final %>%
+  mutate(SigQ = ifelse(MK_yearsig=="Significant",qy_Slope,0), ) #ADD MORE SIG CHANGES
+
+ggplot() + 
+  geom_polygon(data=ak, aes(long, lat, group=group), fill="black", color="black") +
+  geom_point(data=data_AK_final, aes(x=dec_long_va, y=dec_lat_va, color=Percent_change)) +
+  scale_colour_gradient2() +
+  labs(title="Change in Annual Discharge", color=" ")
+
 
 #Plots
 
