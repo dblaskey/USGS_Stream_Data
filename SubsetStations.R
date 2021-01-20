@@ -237,27 +237,33 @@ data_AK_final <- full_join(data_AK_final, FU_stat2) %>%
 
 #Ressesions
 #ReFinal <- final %>%
+  #group_by(site_no, wt_year) %>%
+  #drop_na() %>%
+    #mutate(dq = ifelse(date-lag(date,default = date[1])>0 ,X_00060_00003-lag(X_00060_00003),NA)) %>%
+    #filter(dq<0, as.numeric(Month)==8) %>%
+    #mutate(logq = log10(X_00060_00003), logdq = log10(abs(dq)))
   #rename(day = Day, month = Month, year = Year, flow = X_00060_00003) %>%
-  #group_by(site_no) %>%
+  #group_by(site_no, wt_year) %>%
   #nest()
 
 #RecessionsAnalysis <- final %>%
-  #group_by(site_no) %>%
+  #group_by(site_no, wt_year) %>%
+  #drop_na() %>%
   #summarise(annual_q = sum(X_00060_00003)) %>%
   #add_column(recess = NA)
 
 #nobj <- nrow(ReFinal)
 
 #for(i in 1:nobj){
-#temp <- ReFinal[[2]][[i]] %>%
-#createlfobj(temp, hyearstart = 10, baseflow = FALSE, meta = list())
+#temp <- ReFinal[[3]][[2]] %>%
+#createlfobj(temp, hyearstart = 7, baseflow = FALSE, meta = list())
 
-#RecessionsAnalysis[[3]][[i]] <- recession(temp, method = "IRS", seglen = 7, threshold = 70, thresbreaks = "fixed", plotMRC = FALSE, na.rm = TRUE) 
+#RecessionsAnalysis[[4]][[2]] <- recession(temp, method = "IRS", seglen = 8, threshold = 70, thresbreaks = "fixed", na.rm = TRUE) 
 #}
 
 #For testing purposes only
 data_AK_final <- data_AK_final %>%
-  mutate(SigQ = ifelse(MK_yearsig=="Significant",qy_Slope,0), ) #ADD MORE SIG CHANGES
+  mutate(SigQ = ifelse(MK_yearsig=="Significant",Percent_change,0), ) #ADD MORE SIG CHANGES
 
 ggplot() + 
   geom_polygon(data=ak, aes(long, lat, group=group), fill="black", color="black") +
