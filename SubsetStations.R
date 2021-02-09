@@ -8,9 +8,6 @@ sites2 <- separate(final_sites, "Date", c("Year", "Month", "Day"), sep = "-")
 sites2 <- sites2 %>%
   mutate(wt_year = ifelse(as.numeric(Month)>=10, as.numeric(Year) + 1, as.numeric(Year)))
 
-#Remove Provisional Data
-sites2 <- sites2[!grepl("P", sites2$X_00060_00003_cd),]
-
 #Create table of observations per month
 obsy <- sites2 %>%
   group_by(site_no) %>%
@@ -51,6 +48,9 @@ data_AK <- whatNWISdata(stateCd="AK", parameterCd="00060") %>%
 
 data_AK_final <- semi_join(data_AK, final, by="site_no")%>%
   select(site_no, station_nm, dec_lat_va, dec_long_va)
+
+# Write csv for climate data manipulation
+write.csv(data_AK_final, "sites_AK")
 
 #Plot locations
 ak <- map_data('worldHires','USA:Alaska')
@@ -145,7 +145,7 @@ data_AK_final <- full_join(data_AK_final, flashiness_stat2) %>%
 #Winter Discharge
 winter <- sites2 %>%
   group_by(site_no) %>%
-  filter(3>=as.numeric(Month))
+  filter(2>=as.numeric(Month) | 12 == as.numeric(Month))
 
 wd_criteria <- 75
 
@@ -166,7 +166,7 @@ WD_stat <- winter_discharge %>%
 WD_stat2 <- winter_discharge %>%
   group_by(site_no) %>%
   drop_na() %>%
-  mutate(Year=as.numeric(Year)) %>%
+  mutate(Year=as.numeric(wt_year)) %>%
   do(WD_year=mblm(Winter_Discharge ~ Year, .)) %>%
   mutate(WD_Slope=WD_year$coefficients[2])
 
@@ -236,12 +236,31 @@ data_AK_final <- full_join(data_AK_final, FU_stat2) %>%
   select(-FU)
 
 #Ressesions
-#ReFinal <- final %>%
-  #group_by(site_no, wt_year) %>%
-  #drop_na() %>%
-    #mutate(dq = ifelse(date-lag(date,default = date[1])>0 ,X_00060_00003-lag(X_00060_00003),NA)) %>%
-    #filter(dq<0, as.numeric(Month)==8) %>%
-    #mutate(logq = log10(X_00060_00003), logdq = log10(abs(dq)))
+ReFinal <- final %>%
+  group_by(site_no, wt_year) %>%
+  drop_na() %>%
+  mutate(dq = ifelse(date-lag(date,default = date[1])>0, X_00060_00003-lag(X_00060_00003), NA), recessionday = ifelse(dq<0 & lag(dq)>0,-2,NA), recessionday=0) %>%
+  filter(dq<0, as.numeric(Month)==8) %>%
+  mutate(logq = log10(X_00060_00003), logdq = log10(abs(dq))) %>%
+  group_by(tmp=cumsum(!is.na(recessionday))) %>%
+  mutate(recessionday=recessionday[1] + 1*(0:(length(recessionday)-1))) %>%
+  ungroup()
+
+
+DayDiff <- as.Date(ReFinal$date[2])-as.Date(ReFinal$date[1])
+
+Day <- as.Date(ReFinal$date[2])
+
+n <- nrow(ReFinal)
+for(i in 1:n){
+  ReFinal$recessionday[i] <- ifelse(ReFinal$peak[i]<0, -2, ReFinal$recessionday[i-1]+1)
+}
+
+ReFinal <- ReFinal %>%
+
+
+
+
   #rename(day = Day, month = Month, year = Year, flow = X_00060_00003) %>%
   #group_by(site_no, wt_year) %>%
   #nest()
@@ -303,4 +322,4 @@ for (i in 1:12){
          geom_polygon(data=ak, aes(long, lat, group=group), fill="white", color="black") +
          geom_point(data=temp, aes(x=dec_long_va, y=dec_lat_va, color=factor(MK_monthsig))) +
          labs(title=paste0("Significant Monthly Discharge Change for Month Number ", i), color=" ")
-  }
+}

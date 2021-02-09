@@ -21,8 +21,18 @@ for(i in 1:nsites){
 load(file="sites.Rdata")
 
 #Set criteria for passing
-year_length <- 30
+year_length <-28
 complete_record <- 0.9
+end_year <- as.POSIXct("2013-10-01 00:00:00")
+start_year <- as.POSIXct("1983-10-01 00:00:00")
+
+#Constrain to the last 30 years
+sites <- sites %>%
+  mutate(Date=as.POSIXct(Date)) %>%
+  filter(Date>start_year & Date<end_year)
+
+#Remove Provisional Data
+sites <- sites[!grepl("P", sites$X_00060_00003_cd),]
 
 #Summarize data
 Summarized_data <- sites %>%
@@ -35,14 +45,10 @@ Summarized_data2 <- sites %>%
 Summarized_data <- merge(Summarized_data2, Summarized_data)
   
 Summarized_data <- Summarized_data %>%
-  mutate(end_date=as.POSIXct(end_date)) %>%
-  mutate(start_date=as.POSIXct(start_date)) %>%
-  mutate(Record_length = (end_date - start_date)/365.25) %>%
-  mutate(Completeness = (n/365.25)/as.double(Record_length)) %>%
-  mutate(Effective_obs = Completeness*Record_length) 
+  mutate(Record_length = (end_date - start_date)/365.25)
 
 fail <- Summarized_data %>%
-  filter(Effective_obs<year_length)
+  filter(Record_length<(year_length) | n<(365.25*(year_length)*complete_record))
 
 #Remove years that don't pass
 final_sites <- anti_join(sites,fail)
