@@ -531,5 +531,5 @@ ggplot() +
   scale_size_manual(guide=FALSE, values=c(2,4)) +
   guides(colour = guide_colorbar(order=1), shape = guide_legend(order=2), size = "none")
 
-# Monthly
+# Seasonal Data
 
