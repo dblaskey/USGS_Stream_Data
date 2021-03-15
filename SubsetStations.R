@@ -38,9 +38,11 @@ fail <- pass_year %>%
   filter(Months<MinYcriteria | Ypass==0)
 
 #Remove lines that fail criteria
-final <- anti_join(sites2,fail) %>%
-  mutate(date=as.POSIXct(paste(Year, Month, Day, sep="-")), 
-         wt_year=ifelse(as.numeric(Month)>=10, as.numeric(Year) + 1, as.numeric(Year))) 
+final <- anti_join(sites2,fail) 
+
+#%>%
+  #mutate(date=as.POSIXct(paste(Year, Month, Day, sep="-")), 
+         #wt_year=ifelse(as.numeric(Month)>=10, as.numeric(Year) + 1, as.numeric(Year))) 
 
 #Pull Geo Locations
 data_AK <- whatNWISdata(stateCd="AK", parameterCd="00060") %>%
@@ -60,9 +62,10 @@ data_AK_final <- subset(data_AK_final, dec_long_va<0)
 
 ggplot() + 
   geom_polygon(data=ak, aes(long, lat, group=group), fill="white", color="black") +
-  geom_point(data=data_AK, aes(x=dec_long_va, y=dec_lat_va), color="darkred") +
-  geom_point(data=data_AK_final, aes(x=dec_long_va, y=dec_lat_va), color="darkgreen") +
-  ggtitle("Passing Stations")
+  geom_point(data=data_AK, aes(x=dec_long_va, y=dec_lat_va), color="red") +
+  geom_point(data=data_AK_final, aes(x=dec_long_va, y=dec_lat_va), color="green") +
+  ggtitle("Passing Stations") +
+  theme(plot.title = element_text(hjust = 0.5), panel.border = element_rect(color = "lightgrey", fill=NA, size=0.25), panel.background = element_rect(fill = "white"), panel.grid.major = element_line(size = 0.25, linetype = 'solid', colour = "lightgrey"), panel.grid.minor = element_line(size = 0.25, linetype = 'solid', colour = "lightgrey"))
   
 
 #Monthly and yearly discharge

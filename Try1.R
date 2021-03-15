@@ -21,12 +21,12 @@ for(i in 1:nsites){
 load(file="sites.Rdata")
 
 #Set criteria for passing
-year_length <-28
+year_length <-10
 complete_record <- 0.9
 end_year <- as.POSIXct("2013-10-01 00:00:00")
 start_year <- as.POSIXct("1983-10-01 00:00:00")
 
-#Constrain to the last 30 years
+#Constrain to the desired range of years
 sites <- sites %>%
   mutate(Date=as.POSIXct(Date)) %>%
   filter(Date>start_year & Date<end_year)
