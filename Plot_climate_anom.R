@@ -3,26 +3,37 @@ rm(list = ls())
 library(pacman)
 pacman::p_load(tidyverse)
 
-load("/Users/dybl4375/USGS_Stream_Data_Pull/40yearsfinal.Rdata")
-load("/Users/dybl4375/USGS_Stream_Data_Pull/40yearsites.Rdata")
+load("/Users/dybl4375/USGS_Stream_Data_Pull/final_sites.Rdata")
+load("/Users/dybl4375/USGS_Stream_Data_Pull/30yearsites.Rdata")
 
-sites_subset <- full_join(final, data_AK_final, by = "site_no")
-  
-climate_temp <- read.csv("/Users/dybl4375/USGS_Stream_Data_Pull/climate_data", header = FALSE)
+climate_temp2 <- read.csv("/Users/dybl4375/USGS_Stream_Data_Pull/climate_data", header = FALSE)
 names <- c("t_tot", "pcp_tot", "Date", "COMID")
-colnames(climate_temp) <- names
+colnames(climate_temp2) <- names
+
+climate_temp1 <- read.csv("/Users/dybl4375/USGS_Stream_Data_Pull/hist_climate_data", header = TRUE)
+colnames(climate_temp1) <- names
+
+climate_temp <- rbind(climate_temp1, climate_temp2) 
 
 COMIDS <- unique(climate_temp$COMID)
-site_nos <- c("1548400", "15276000", "15515500", "15290000", "15302000", "15304000",
+site_nos <- c("15484000", "15276000", "15515500", "15290000", "15302000", "15304000",
               "15514000", "15356000", "1525800", "15292000")
 
 df <- data.frame(COMIDS, site_nos)
 colnames(df) <- c("COMID", "site_no")
 
-climate_temp <- full_join(df,climate_temp) %>%
+climate_temp <- full_join(df, climate_temp) %>%
   mutate(Date=lubridate::ymd_hms(Date)) %>%
   mutate(Year = lubridate::year(Date), Month = lubridate::month(Date), Day = lubridate::day(Date)) %>%
   mutate(wt_year = ifelse(as.numeric(Month)>=10, as.numeric(Year) + 1, as.numeric(Year)))
+
+sites_subset <- left_join(df, final_sites)
+sites_subset <- left_join(sites_subset, data_AK_final)%>%
+  mutate(Date=lubridate::ymd(Date)) %>%
+  mutate(Year = lubridate::year(Date), Month = lubridate::month(Date), Day = lubridate::day(Date)) %>%
+  mutate(wt_year = ifelse(as.numeric(Month)>=10, as.numeric(Year) + 1, as.numeric(Year))) %>%
+  group_by(site_no) %>%
+  mutate(ave_Q = mean(X_00060_00003, na.rm = TRUE))
 
 annomoly_graph <- function(clim_first_month, clim_last_month, 
                            dis_first_month, dis_last_month, season, dis, place){
@@ -104,7 +115,7 @@ ggplot() +
   ylab ("Precipitation Anomaly (mm)") + 
   scale_color_manual(values = colorpal, breaks = c("6", "5", "4", "3", "2", "1"),  guide = "none") +
   geom_point(data= Centroid, shape = 21, aes(x=ave_t, y=ave_pcp, fill=factor(PCT_bin)), color="black", size = 4, stroke=1) + 
-  scale_fill_manual(name="Percentile\nCentroid", values = colorpal, breaks = c("6", "5", "4", "3", "2", "1"), labels = c(">90", "70-90", "50-70", "30-50", "10-30","<10"))
+  scale_fill_manual(name="Discharge\nPercentile", values = colorpal, breaks = c("6", "5", "4", "3", "2", "1"), labels = c(">90", "70-90", "50-70", "30-50", "10-30","<10"))
 }
 
 annomoly_graph(12,2,12,2,"Winter", "Winter Climate", "Alaska")
