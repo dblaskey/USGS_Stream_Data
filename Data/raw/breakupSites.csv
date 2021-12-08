@@ -1,0 +1,487 @@
+id,region,river,atnr,location,lid
+1,Arctic,Arctic Ocean,at,Barrow,\N
+2,Arctic,Arctic Ocean,at,Kivalina,\N
+3,Arctic,Arctic Ocean,at,Point Hope,\N
+4,Arctic,Arctic Ocean,at,Point Lay,\N
+5,Arctic,Arctic Ocean,at,Shishmaref,\N
+6,Arctic,Beaufort Sea,at,Barter Island,\N
+7,Arctic,Bering Sea,at,Gambell,\N
+8,Arctic,Bering Sea,at,Nome,\N
+9,Arctic,Bering Sea,at,Northeast Cape,\N
+10,Arctic,Bering Sea,at,Savoonga,\N
+11,Arctic,Bering Sea,at,Tin City,\N
+12,Arctic,Bering Sea,at,Wainwright,\N
+13,Arctic,Bering Sea,at,Wales,\N
+14,Arctic,Buckland River,at,Buckland,\N
+15,Arctic,Camden Bay,at,Camden Bay,\N
+16,Arctic,Chukchi Sea,at,Cape Lisbourne,\N
+17,Arctic,Colville River,at,Colville Village,\N
+18,Arctic,Colville River,at,Umiat,\N
+19,Arctic,Contact Creek,at,Anaktuvuk Pass,\N
+20,Arctic,Fish River,at,White Mountain,\N
+21,Arctic,Freshwater Lake,at,Barter Island,\N
+22,Arctic,Golovin Bay,nr,White Mountain,\N
+23,Arctic,Goodhope Bay,at,Deering,\N
+24,Arctic,Grantley Harbor,at,Teller,\N
+25,Arctic,Inmachuk River,at,Deering,\N
+26,Arctic,Inmachuk Sound,at,Deering,\N
+27,Arctic,Kasegaluk Lagoon,at,Wainright,\N
+28,Arctic,Kivalina River,at,Kivalina,\N
+29,Arctic,Kiwalik River,at,Candle,\N
+30,Arctic,Kiwalik River,nr,Kotzebue Sound,\N
+31,Arctic,Kobuk River,at,Ambler,\N
+32,Arctic,Kobuk River,at,Kiana,\N
+33,Arctic,Kobuk River,at,Kobuk,\N
+34,Arctic,Kobuk River,at,Noorvik,\N
+35,Arctic,Kobuk River,at,Shungnak,\N
+36,Arctic,Kokolik River,at,Point Lay,\N
+37,Arctic,Kotzebue Sound,at,Deering,\N
+38,Arctic,Kotzebue Sound,at,Kotzebue,\N
+39,Arctic,Koyuk River,at,Koyuk,\N
+40,Arctic,Kuk River,at,Wainwright,\N
+41,Arctic,Kukpouruk River,nr,Point Lay,\N
+42,Arctic,Kukpuk River,at,Point Lay,\N
+43,Arctic,Kuparuk River,at,Kuparuk,\N
+44,Arctic,Kwiniuk River,at,Moses Point,\N
+45,Arctic,Lake Noise,at,Teller,\N
+46,Arctic,Lake Troutman,nr,Gambell,\N
+47,Arctic,Marryat Inlet,nr,Point Hope,\N
+48,Arctic,Meade River,at,Atkasuk,\N
+49,Arctic,Noatak River,at,Fish Hatchery,\N
+50,Arctic,Noatak River,at,Noatak,\N
+51,Arctic,Nome River,nr,Nome,\N
+52,Arctic,Norton Bay,at,Moses Point,\N
+53,Arctic,Norton Sound,at,Elim,\N
+54,Arctic,Norton Sound,at,Nome,\N
+55,Arctic,Norton Sound,at,Saint Michael,\N
+56,Arctic,Norton Sound,nr,Stebbins,\N
+57,Arctic,Norton Sound,at,Unalakleet,\N
+58,Arctic,Port Clarence,at,Teller,\N
+59,Arctic,Quinahak River,nr,Elim,\N
+60,Arctic,Sagavanirktok River,at,Deadhorse,\N
+61,Arctic,Sagavanirktok River,at,Prudhoe,\N
+62,Arctic,Saint Michael Bay,at,Saint Michael,\N
+63,Arctic,Savoonga Creek,at,Savoonga,\N
+64,Arctic,Savoonga Harbor,at,Savoonga,\N
+65,Arctic,Selawik River,at,Selawik,\N
+66,Arctic,Serpentine River,at,Shishmaref,\N
+67,Arctic,Shaktoolik River,at,Shaktoolik,\N
+68,Arctic,Shishmaref Inlet,at,Shishmaref,\N
+69,Arctic,Snake River,at,Nome,\N
+70,Arctic,Squirrel River,nr,Kiana,\N
+71,Arctic,St. Michael Bay,at,St. Michael,\N
+72,Arctic,Summit Lake,at,Anaktuvuk Pass,\N
+73,Arctic,Troutman Lake,at,Gambell,\N
+74,Arctic,Unalakleet River,at,Unalakleet,\N
+75,Arctic,Wainwright Inlet,at,Wainwright,\N
+76,Arctic,Wales Harbor,at,Wales,\N
+77,Arctic,Wales River,at,Wales,\N
+78,Arctic,Wulik River,nr,Kivalina,\N
+79,Copper,Chistochina River,at,Chistochina,\N
+80,Copper,Chistochina River,nr,Mankomen Lake,\N
+81,Copper,Chitina River,nr,Chitina,\N
+82,Copper,Cobb Lake,nr,Slana,\N
+83,Copper,Copper River,nr,Chitina,\N
+84,Copper,Copper River,at,Copper Center,\N
+85,Copper,Copper River,at,Gakona,\N
+86,Copper,Copper River,nr,Gulkana,\N
+87,Copper,Eureka Lake,at,Eureka,\N
+88,Copper,Eyak Lake,nr,Cordova,\N
+89,Copper,Gakona River,at,Gakona,\N
+91,Copper,Gakona River,at,Gulkana,\N
+93,Copper,Gulkana River,nr,Gakona,\N
+94,Copper,Gulkana River,at,Sourdough,\N
+95,Copper,Kennicott River,at,McCarthy,\N
+96,Copper,Klutina River,at,Copper Center,\N
+97,Copper,Klutina River,at,Gulkana,\N
+98,Copper,Little Nelchina River,at,Nelchina,\N
+100,Copper,Mankomen Lake,at,Mankomen Lake,\N
+101,Copper,Paxson Lake,nr,Gulkana,\N
+102,Copper,Sheep Creek,at,Thompson Pass,\N
+103,Copper,Slana River,nr,Slana,\N
+104,Copper,Snowshoe Lake,at,Snowshoe Lake,\N
+105,Copper,Tazlina River,nr,Glennallen,\N
+106,Copper,Tazlina River,nr,Gulkana,\N
+107,Copper,Tolsona Lake,at,Tolsona Lk Resort,\N
+108,Copper,Tonsina River,at,Thompson Pass,\N
+109,Copper,Tonsina River,at,Tonsina,\N
+110,Copper,Town Lake,at,Chitina,\N
+111,Copper,Twin Lakes,nr,Slana,\N
+112,Southcentral,Alexander Creek,at,Mouth,\N
+113,Southcentral,Amber Lake,at,Oilwell Road,\N
+114,Southcentral,Anchor River,at,Anchor Point,\N
+115,Southcentral,Beluga Lake,at,Homer,\N
+116,Southcentral,Big Lake,at,Big Lake,\N
+117,Southcentral,Big River Lakes,at,Big River Lakes,\N
+118,Southcentral,Buskin Lake,nr,Kodiak,\N
+119,Southcentral,Campbell Creek,at,Anchorage,\N
+120,Southcentral,Campbell Creek,at,Lake Otis Pky. Anchorage,\N
+121,Southcentral,Campbell Lake,at,Anchorage,\N
+122,Southcentral,Caribou Creek,at,Sheep Mountain,\N
+123,Southcentral,Caribou Creek,at,Skwentna,\N
+124,Southcentral,Chelatna Lake,nr,Lake Creek,\N
+126,Southcentral,Chester Creek,at,Arctic Blvd. Anchorage,\N
+127,Southcentral,Chester Creek,at,Gambell Anchorage,\N
+128,Southcentral,Cook Inlet,at,Anchorage,\N
+129,Southcentral,Cook Inlet,at,Kasilof,\N
+130,Southcentral,Cottonwood Lake,at,Wasilla,\N
+131,Southcentral,Daniels Lake,nr,Kenai,\N
+132,Southcentral,Deshka River,at,Big Susitna,\N
+133,Southcentral,Dinkel Lake,at,Wasilla,\N
+134,Southcentral,Eagle River,at,Eagle River,\N
+135,Southcentral,Echo Lake,nr,Palmer,\N
+136,Southcentral,Eight Mile Creek,nr,Skwentna,\N
+137,Southcentral,Eklutna Lake,nr,Eklutna,\N
+138,Southcentral,Eklutna River,at,Eklutna Project,\N
+139,Southcentral,Elephant Lake,nr,Kodiak,\N
+142,Southcentral,Glacier Creek,at,Girdwood,\N
+143,Southcentral,Glacier Creek,nr,Seward,\N
+144,Southcentral,Jewel Lake,at,,\N
+145,Southcentral,Karluk Lake,nr,Karluk,\N
+146,Southcentral,Kasilof River,at,Cohoe,\N
+147,Southcentral,Kasilof River,at,Kasilof,\N
+148,Southcentral,Kenai Lake,at,Cooper Landing,\N
+149,Southcentral,Kenai River,at,Cooper Landing,\N
+150,Southcentral,Kenai River,at,Kenai,\N
+151,Southcentral,Kenai River,at,Kenai Keys,\N
+152,Southcentral,Kenai River,at,Soldotna,\N
+153,Southcentral,Kenai River,at,Sterling,\N
+154,Southcentral,Knik River,nr,Eklutna Lake,\N
+155,Southcentral,Knik River,nr,Eklutna Project,\N
+157,Southcentral,Kroto Creek,at,Oilwell Road,\N
+159,Southcentral,Lake Hood-Spenard,at,Anchorage,\N
+160,Southcentral,Little Kitoi Lake,at,Kitoi Bay,\N
+162,Southcentral,Little Susitna River,at,Houston,\N
+163,Southcentral,Little Susitna River,nr,Palmer,\N
+165,Southcentral,Louise Lake,nr,Kodiak,\N
+166,Southcentral,Lucille Lake,at,Wasilla,\N
+167,Southcentral,Maclaren River,at,Denali Hwy,\N
+168,Southcentral,Matanuska River,at,Glacier Park Resort,\N
+169,Southcentral,Matanuska River,at,Palmer,\N
+170,Southcentral,Matanuska River,at,Sheep Mountain,\N
+171,Southcentral,Matanuska River,at,Sutton,\N
+172,Southcentral,Montana Creek,at,Parks Highway,\N
+174,Southcentral,Moose Creek,at,Oilwell Road,\N
+175,Southcentral,Moose River,at,Sterling,\N
+177,Southcentral,Ninilchik River,at,Ninilchik,\N
+178,Southcentral,Puntilla Lake,at,Puntilla,\N
+179,Southcentral,Resurrection Creek,at,Hope,\N
+180,Southcentral,Resurrection River,at,Seward,\N
+181,Southcentral,Skwentna River,at,Puntilla,\N
+182,Southcentral,Skwentna River,at,Skwentna,\N
+183,Southcentral,Snow River,nr,Seward,\N
+185,Southcentral,Susitna River,at,Alexander Creek,\N
+186,Southcentral,Susitna River,at,Curry,\N
+187,Southcentral,Susitna River,at,Gold Creek,\N
+188,Southcentral,Susitna River,at,Montana Creek,\N
+189,Southcentral,Susitna River,at,Sunshine,\N
+190,Southcentral,Susitna River,at,Susitna Landing,\N
+191,Southcentral,Susitna River,at,Susitna Station,\N
+192,Southcentral,Susitna River,at,Talkeetna,\N
+193,Southcentral,Susitna River,at,Yentna River,\N
+194,Southcentral,Talkeetna River,at,Talkeetna,\N
+195,Southcentral,Trail Lake,at,Moose Pass,\N
+196,Southcentral,Trail Lake,nr,Moose Pass (Lower Lake),\N
+197,Southcentral,Trail Lake,at,Moose Pass (Upper Lake),\N
+198,Southcentral,Trail River,nr,Lawing,\N
+199,Southcentral,Upper Russian Lake,at,Upper Russian Lake,\N
+200,Southcentral,Wasilla Lake,at,Wasilla,\N
+201,Southcentral,Westchester Lagoon,at,,\N
+202,Southcentral,Willow Creek,at,Willow,\N
+203,Southcentral,Willow Lake,at,Willow,\N
+518,Yukon,Porcupine,at,Old Crow,\N
+205,Southcentral,Yentna River,at,Big Bend,\N
+206,Southcentral,Yentna River,at,Fish Creek,\N
+207,Southcentral,Yentna River,at,Lake Creek,\N
+208,Southcentral,Yentna River,at,Skwentna,\N
+209,Southcentral,Yentna River,at,Susitna,\N
+210,Southeast,Anuk Lake,at,Juneau,\N
+211,Southeast,Auke Lake,at,Juneau,\N
+212,Southeast,Baranof Lake,at,Baranof,\N
+213,Southeast,Cabin Creek,at,Smeaton Bay,\N
+214,Southeast,Chilkat River,at,Klukwan,\N
+215,Southeast,Favorite Bay,at,Angoon,\N
+216,Southeast,Harris Creek,at,Hollis,\N
+217,Southeast,Hood Bay,at,Angoon,\N
+218,Southeast,Indian Creek,at,Hollis,\N
+219,Southeast,Maybeso Creek,at,Hollis,\N
+220,Southeast,Mendenhall Lake,nr,Juneau,\N
+221,Southeast,Mitchell Bay,at,Angoon,\N
+222,Southeast,Montana Creek,nr,Auke Bay,\N
+223,Southeast,Petersburg Lake,at,Petersburg,\N
+224,Southeast,Salmon River,at,Gustavus,\N
+225,Southeast,Silvis Lake,at,Beaver Falls,\N
+226,Southeast,Skagway River,at,Skagway,\N
+227,Southeast,Stikine River,at,Wrangall,\N
+228,Southeast,Taiya River,nr,Skagway,\N
+229,Southeast,Taku River,at,Taku Pass,\N
+230,Southeast,Unuk River,at,Unuk River,\N
+231,Southeast,Windham Bay,at,Windham Bay,\N
+232,Southwest,Aleknagik Lake,at,Aleknagik,\N
+233,Southwest,Aniak River,at,Aniak,\N
+234,Southwest,Aniak Slough,at,Aniak,\N
+235,Southwest,Bering Sea,at,Nunivak,\N
+236,Southwest,Bering Sea,at,St. George Island,\N
+237,Southwest,Bering Sea,at,St. Paul Island,\N
+238,Southwest,Big River,nr,McGrath,\N
+239,Southwest,Bristol Bay,nr,King Salmon,\N
+240,Southwest,Brooks Lake,at,Brooks Lake,\N
+241,Southwest,Cape Newenham Inlet,at,Cape Newenham,\N
+242,Southwest,Lake Clark,at,Port Alsworth,\N
+243,Southwest,Cold Bay,at,Cold Bay,\N
+244,Southwest,Crooked Creek,at,Crooked Creek,\N
+246,Southwest,Eek Lake,at,Eek,\N
+247,Southwest,Eek River,at,Eek,\N
+248,Southwest,Egegik River,at,Egegik,\N
+249,Southwest,Farewell Lake,at,Farewell,\N
+250,Southwest,Gold Fish Lake,at,Port Heiden,\N
+251,Southwest,Goodnews Bay,at,Goodnews Bay,\N
+252,Southwest,Goodnews Bay,at,Platinum,\N
+253,Southwest,Goodnews River,at,Goodnews Bay,\N
+254,Southwest,Hardenbourg Bay,at,Port Alsworth,\N
+255,Southwest,Iliamna Lake,at,Iliamna,\N
+256,Southwest,Iliamna Lake,at,Kakhanok Bay,\N
+258,Southwest,Intricate Bay,at,Pope Vannoy Landing,\N
+259,Southwest,Johnson River,at,Nunapitchuk,\N
+260,Southwest,Kakhonok Bay,at,Kakhanok Bay,\N
+261,Southwest,Kanektok River,at,Quinhagak,\N
+262,Southwest,King Salmon Creek,at,King Salmon,\N
+263,Southwest,Klag Bay,at,Chichagof,\N
+264,Southwest,Kuskokwim Bay,at,Cape Newenham,\N
+266,Southwest,Kuskokwim Bay,at,Kwigillingok,\N
+267,Southwest,Kuskokwim Bay,at,Quinhagak,\N
+268,Southwest,Kuskokwim River,at,Akiachak,\N
+269,Southwest,Kuskokwim River,at,Akiak,\N
+270,Southwest,Kuskokwim River,at,Aniak,\N
+271,Southwest,Kuskokwim River,at,Bethel,\N
+272,Southwest,Kuskokwim River,at,Chuathbaluk,\N
+273,Southwest,Kuskokwim River,at,Crooked Creek,\N
+274,Southwest,Kuskokwim River,at,Kalskag,\N
+275,Southwest,Kuskokwim River,at,Kwethluk,\N
+276,Southwest,Kuskokwim River,at,McGrath,\N
+277,Southwest,Kuskokwim River,at,Medfra,\N
+278,Southwest,Kuskokwim River,at,Napakiak,\N
+279,Southwest,Kuskokwim River,at,Napaimute,\N
+280,Southwest,Kuskokwim River,at,Napaskiak,\N
+281,Southwest,Kuskokwim River,at,Nikolai,\N
+282,Southwest,Kuskokwim River,at,Oscarville,\N
+283,Southwest,Kuskokwim River,at,Quinhagak,\N
+284,Southwest,Kuskokwim River,at,Red Devil,\N
+285,Southwest,Kuskokwim River,at,Sleetmute,\N
+286,Southwest,Kuskokwim River,at,Stony River,\N
+287,Southwest,Kuskokwim River,nr,Tatalina,\N
+288,Southwest,Kuskokwim River,at,Tuluksak,\N
+289,Southwest,Kuskokwim River,at,Tuntatuliak,\N
+291,Southwest,Kvichak River,at,Iguigig,\N
+292,Southwest,Kvichak River,at,Levelock,\N
+293,Southwest,Kwethluk River,at,Kwethluk,\N
+294,Southwest,Kwigillingok River,at,Kwigillingok,\N
+295,Southwest,Little Togiak Lake,nr,Lake Nerka,\N
+296,Southwest,Mekoryuk Bay,at,Nunivak,\N
+297,Southwest,Mekoryuk River,at,Nunivak,\N
+298,Southwest,Naknek Lake,nr,King Salmon,\N
+299,Southwest,Naknek River,at,King Salmon,\N
+301,Southwest,Naknek River,at,Naknek,\N
+302,Southwest,Nerka Lake,at,Nerka Lake,\N
+303,Southwest,Newhalen River,at,Iliamna,\N
+304,Southwest,Newhalen River,at,near,\N
+305,Southwest,Newhalen River,nr,Nondalton,\N
+307,Southwest,Nixon Fork,nr,McGrath,\N
+308,Southwest,Nushagak Bay,at,Dillingham,\N
+309,Southwest,Nushagak River,at,Dillingham,\N
+310,Southwest,Nushagak River,at,Ekwok,\N
+311,Southwest,Nushagak River,at,Koliganek,\N
+312,Southwest,Nushagak River,at,New Stuyahok,\N
+313,Southwest,Packer Lake,nr,Ugashik,\N
+314,Southwest,Port Alsworth,at,Port Alsworth,\N
+315,Southwest,Port Heiden Bay,at,Port Heiden,\N
+316,Southwest,Quinhagak River,at,Quinhagak,\N
+317,Southwest,Russel Creek,nr,Cold Bay,\N
+318,Southwest,Salt Lagoon,at,St. Paul Island,\N
+319,Southwest,Sheep Creek,nr,Farewell,\N
+320,Southwest,Six Mile Lake,at,Nondalton,\N
+321,Southwest,Stony River,at,Stony River Lodge,\N
+322,Southwest,Takotna River,nr,McGrath,\N
+323,Southwest,Takotna River,at,Takotna,\N
+324,Southwest,Takotna River,nr,Tatalina,\N
+325,Southwest,Tanunak Bay,at,Tanunak,\N
+326,Southwest,Tanunak River,nr,Tanunak,\N
+327,Southwest,Tooksook Bay,at,Tooksook Bay,\N
+328,Southwest,Tuluksak River,nr,Nyac,\N
+329,Southwest,Tuluksak River,at,Tuluksak,\N
+330,Southwest,Ugashik River,at,Aleknagik,\N
+331,Southwest,Ugashik River,at,Ugashik,\N
+332,Southwest,Weather Service Lake,at,St. Paul Island,\N
+333,Southwest,Wood River,at,Aleknagik,\N
+334,Tanana,Bolio Lake,at,Big Delta,\N
+335,Tanana,Brown Lake,nr,Livengood,\N
+336,Tanana,Cantwell River,nr,Cantwell,\N
+337,Tanana,Cantwell River,at,Summit,\N
+339,Tanana,Chatanika River,at,Chatanika,\N
+341,Tanana,Chatanika River,at,Elliott Hwy Bridge,\N
+342,Tanana,Chatanika River,at,Steese Highway,\N
+343,Tanana,Chena River,at,,\N
+344,Tanana,Chena River,at,38mile Chena Hot Sp. Road,\N
+345,Tanana,Chena River,at,College,\N
+346,Tanana,Chena River,at,Fairbanks,\N
+347,Tanana,Chena River,at,Fairbanks (Pikes),\N
+348,Tanana,Chena River,at,University Exp. Station,\N
+349,Tanana,Chisana River,at,Northway,\N
+350,Tanana,Crooked Creek,at,Central,\N
+351,Tanana,Delta River,at,Big Delta,\N
+352,Tanana,Delta River,at,Trim's Camp,\N
+353,Tanana,Edes Lake,nr,Cantwell,\N
+354,Tanana,Edes Lake,nr,Summit,\N
+355,Tanana,Healy River,at,Healy,\N
+356,Tanana,Healy River,at,Usibelli,\N
+357,Tanana,Jarvis Creek,at,Big Delta,\N
+358,Tanana,Lake Minchumina,at,Lake Minchumina,\N
+359,Tanana,Mirror Lake,nr,Cantwell,\N
+360,Tanana,Mirror Lake,nr,Summit,\N
+361,Tanana,Nabesna River,at,Healy Fork,\N
+363,Tanana,Nabesna River,nr,Northway,\N
+364,Tanana,Nenana River,at,Healy,\N
+365,Tanana,Nenana River,at,McKinley Park,\N
+366,Tanana,Nenana River,at,Rex Bridge,\N
+367,Tanana,Nenana River,at,Tanana,\N
+368,Tanana,Phelan Creek,at,Trimms Camp,\N
+369,Tanana,Quartz Lake,nr,Big Delta,\N
+370,Tanana,Salcha River,at,Gravel Bar,\N
+371,Tanana,Salcha River,at,Johnsons,\N
+372,Tanana,Salcha River,at,Richardson Highway Bridge,\N
+373,Tanana,Smith Lake,at,College 5NW Ice,\N
+374,Tanana,Summit Lake,nr,Cantwell,\N
+375,Tanana,Summit Lake,nr,Summit,\N
+376,Tanana,Tanana River,at,Big Delta,\N
+377,Tanana,Tanana River,at,Cathedral Bluffs,\N
+378,Tanana,Tanana River,at,Fairbanks D-S of Chena R,\N
+379,Tanana,Tanana River,nr,Manley Hot Springs,\N
+381,Tanana,Tanana River,nr,Minto,\N
+382,Tanana,Tanana River,at,Nenana,\N
+383,Tanana,Tanana River,at,Northway,\N
+384,Tanana,Tanana River,at,Tanacross,\N
+385,Tanana,Tanana River,at,Tanana,\N
+386,Tanana,Tanana River,at,Tolovana,\N
+387,Tanana,Tanana River,at,University Exp. Station,\N
+388,Tanana,Tanana River,at,West End Chena Ridge,\N
+389,Tanana,Tetlin Lake,at,Tetlin,\N
+390,Tanana,Tetlin River,at,Tetlin,\N
+391,Tanana,Tok River,nr,Tok Junction,\N
+392,Tanana,Tolovana River,nr,Livengood,\N
+393,Tanana,Tolovana River,at,Tolovana,\N
+394,Tanana,Twin Lakes,nr,Nabesna,\N
+396,Yukon,Alakanuk Slough,at,Alakanuk,\N
+397,Yukon,Alatna River,at,Allakaket,\N
+398,Yukon,Andreafsky River,at,St. Marys,\N
+399,Yukon,Anvik River,at,Anvik,\N
+400,Yukon,Tbd Lake,nr,Chandalar,\N
+401,Yukon,Birch Creek,at,Steese Hwy Bridge,\N
+402,Yukon,Black River,at,Chalkyitsik,\N
+403,Yukon,Chandalar Lake,at,Chandalar Lake,\N
+404,Yukon,Chandalar River,at,Chandalar,\N
+405,Yukon,Chandalar River,at,Venetie,\N
+406,Yukon,Coal Creek,at,Coal Creek,\N
+407,Yukon,Fortymile River,nr,Boundary,\N
+409,Yukon,Fortymile River,at,,\N
+410,Yukon,Fortymile River,at,Mosquito Fork,\N
+411,Yukon,Fortymile River,at,Taylor Hwy Bridge,\N
+412,Yukon,Grouse Creek,nr,Circle Hot Springs,\N
+413,Yukon,Hooper Bay,at,Hooper Bay,\N
+414,Yukon,Hooper Bay Slough,at,Hooper Bay,\N
+415,Yukon,Iditarod River,at,Flat,\N
+416,Yukon,Igiak Bay,at,Cape Romanzof,\N
+417,Yukon,Indian River,nr,Utopia,\N
+418,Yukon,Innoko River,at,Holikachuk,\N
+419,Yukon,Innoko River,nr,Ophir,\N
+420,Yukon,Innoko River,at,Shageluk,\N
+421,Yukon,John River,nr,Anaktuvik Pass,\N
+422,Yukon,John River,at,Bettles,\N
+423,Yukon,Keggatmiut Riv (Kun),at,Scammon Bay,\N
+424,Yukon,Ketchum Lake,nr,Circle Hot Springs,\N
+425,Yukon,Klondike River,at,Dawson,\N
+426,Yukon,Koyukuk River,at,Allakaket,\N
+427,Yukon,Koyukuk River,at,Bettles,\N
+428,Yukon,Koyukuk River,at,Hughes,\N
+429,Yukon,Koyukuk River,at,Huslia,\N
+430,Yukon,Koyukuk River,at,Koyukuk,\N
+431,Yukon,Koyukuk River,at,Wiseman,\N
+433,Yukon,Kwemluk Pass,at,Sheldon Point,\N
+434,Yukon,Kwiguk Pass,at,Emmonak,\N
+435,Yukon,Kwiguk River,at,Kwiguk,\N
+437,Yukon,Lower Portage Creek,nr,Circle Hot Springs,\N
+438,Yukon,Medicine Lake,nr,Circle Hot Springs,\N
+439,Yukon,Melozitna River,nr,Ruby,\N
+440,Yukon,Mosquito,nr,Chicken,\N
+441,Yukon,Muddy River,nr,Lake Minchumina,\N
+442,Yukon,Ninglikfak River,at,Chevak,\N
+443,Yukon,Nulato River,at,Nulato,\N
+444,Yukon,OBrien Creek,at,Fortymile,\N
+445,Yukon,Otter Creek,at,Flat,\N
+446,Yukon,Polte Slough,at,Marshall,\N
+447,Yukon,Porcupine River,nr,Fort Yukon,\N
+448,Yukon,Portage Creek,nr,Circle Hot Springs,\N
+449,Yukon,Scammon Bay,at,Scammon Bay,\N
+450,Yukon,Shageluk Slough,at,Shageluk,\N
+451,Yukon,Sucker River,nr,Fort Yukon,\N
+452,Yukon,Utopia Creek,nr,Utopia,\N
+454,Yukon,Walker Slough,nr,Holy Cross,\N
+455,Yukon,Wild River,nr,Bettles,\N
+457,Yukon,Wiseman Creek,at,Wiseman,\N
+459,Yukon,Woodchopper Creek,at,Coal Creek,\N
+460,Yukon,Woodchopper Creek,at,Woodchopper Creek,\N
+461,Yukon,Yukon River,at,Alakanuk,\N
+462,Yukon,Yukon River,at,Anvik,\N
+463,Yukon,Yukon River,at,Beaver,\N
+464,Yukon,Yukon River,at,Carmacs,\N
+465,Yukon,Yukon River,at,Circle,\N
+466,Yukon,Yukon River,at,Coal Creek,\N
+467,Yukon,Yukon River,at,Dalton Hwy Bridge,\N
+468,Yukon,Yukon River,at,Dawson,\N
+469,Yukon,Yukon River,at,Eagle,\N
+471,Yukon,Yukon River,nr,Emmonak,\N
+472,Yukon,Yukon River,at,Fort Yukon,\N
+474,Yukon,Yukon River,at,Fortuna Ledge,\N
+475,Yukon,Yukon River,at,Galena,\N
+476,Yukon,Yukon River,at,Grayling,\N
+477,Yukon,Yukon River,at,Hamilton,\N
+478,Yukon,Yukon River,at,Holy Cross,\N
+479,Yukon,Yukon River,at,Hughes,\N
+480,Yukon,Yukon River,at,Kaltag,\N
+481,Yukon,Yukon River,at,Kokrines,\N
+482,Yukon,Yukon River,at,Koyukuk,\N
+483,Yukon,Yukon River,at,Kwiguk,\N
+484,Yukon,Yukon River,at,Marshall,\N
+485,Yukon,Yukon River,at,Mountain Village,\N
+486,Yukon,Yukon River,at,Nulato,\N
+487,Yukon,Yukon River,at,Paimiut,\N
+488,Yukon,Yukon River,at,Pilot Station,\N
+489,Yukon,Yukon River,at,Pitkas Point,\N
+490,Yukon,Yukon River,at,Rampart,\N
+491,Yukon,Yukon River,at,Ruby,\N
+492,Yukon,Yukon River,at,Russian Mission,\N
+493,Yukon,Yukon River,at,Stevens Village,\N
+494,Yukon,Yukon River,at,Tanana,\N
+495,Yukon,Yukon River,at,Whitehorse,\N
+496,Yukon,Yukon River,at,Woodchopper Creek,\N
+497,Tanana,Tanana River,at,Salcha,\N
+498,Southcentral,Big River Lakes,at,Lake Clark Pass,\N
+499,Southcentral,Chelatna Lake,at,Chelatna Lake,\N
+500,Southcentral,Deep Creek,at,Ninilchik,\N
+501,Southcentral,Deshka River,at,Willow,\N
+502,Yukon,Chandalar River,at,Arctic Village,\N
+503,Southwest,Emmonak Slough,at,Emmonak,\N
+504,Southcentral,Exit Creek,at,Exit Glacier,\N
+505,Yukon,Fortymile River,at,South Fork,\N
+506,Yukon,Fortymile River,at,Walker Fork,\N
+507,Yukon,Fortymile River,at,West Fork,\N
+508,Yukon,Innoko River,at,McGrath,\N
+509,Southcentral,Lake Louise,at,Tazlina Glacier Lodge,\N
+510,Copper,Mankomen Lake,at,Gakona,\N
+511,Yukon,Middle Fork Koyukuk,at,Wiseman,\N
+512,Copper,Sinona Lake,nr,Paxson,\N
+513,Yukon,Smokey Lake,at,Tazlina Glacier Lodge,\N
+514,Southcentral,Wasilla Creek,at,Wasilla,\N
+515,Copper,Eyak River,nr,Cordova,\N
+516,Southeast,Auke Lake,at,Auke Bay,\N
+517,Yukon,Kandik River,at,Mile 50,\N
+519,Yukon,Yukon River,at,Saint Marys,\N
