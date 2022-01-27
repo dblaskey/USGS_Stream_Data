@@ -11,8 +11,13 @@ ID_River_Plots = function(path_df, start_year, end_year, plot_title){
     group_by(site_name, decade, Month) %>% 
     summarise(ave_month_dis = mean(month_dis))
   
+  river$site_name = factor(river$site_name, levels = 
+                                    c("Nuyakuk River", "Kenai River",
+                                      "Ship Creek", "Little Susitna River", "Kuskokwim River",
+                                      "Susitna River", "Salcha River", "Chena River", "Kuparuk River"))
+    
   ggplot() + 
-    facet_wrap(vars(site_name), scales = "free", nrow = 5) +
+    facet_wrap(vars(site_name), scales = "free", nrow = 3) +
     geom_line(data = river, aes(x = as.numeric(Month), y = ave_month_dis, color = factor(decade))) + 
     scale_color_npg(name = "Decade") +
     scale_x_continuous(name = "Month", breaks = 1:12, labels = substr(month.abb, 1,1)) +
@@ -24,5 +29,5 @@ ID_River_Plots = function(path_df, start_year, end_year, plot_title){
           strip.text.x = element_text(colour = "black", margin = margin(.1, 0, .1, 0, "cm"))) +
     ggtitle(plot_title) 
   
-  ggsave(path = "./documents/figures/", filename="decadal_discharge", width = 7, height = 8, device="jpeg", dpi=700)
+  ggsave(path = "./documents/figures/", filename="decadal_discharge", width = 9, height = 6, device="jpeg", dpi=700)
 }

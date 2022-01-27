@@ -8,17 +8,13 @@ Barplot_Trends = function (df_path, type){
                         "Increasing at 0.01 Significance", 
                         ifelse(0.05 >= as.numeric(P_Value) & as.numeric(Sens_Slope)>0, 
                                "Increasing at 0.05 Significance", 
-                        ifelse(0.1 >= as.numeric(P_Value) & as.numeric(Sens_Slope)>0,
-                               "Increasing at 0.1 Significance",  
-                        ifelse(0.01 >= as.numeric(P_Value) & as.numeric(Sens_Slope)<0, 
-                                "Decreasing at 0.01 Significance", 
-                        ifelse(0.05 >= as.numeric(P_Value) & as.numeric(Sens_Slope)<0, 
-                                "Decreasing at 0.05 Significance", 
-                        ifelse(0.1 >= as.numeric(P_Value) & as.numeric(Sens_Slope)<0,
-                                "Decreasing at 0.1 Significance", "Not Significant")))))))
+                               ifelse(0.01 >= as.numeric(P_Value) & as.numeric(Sens_Slope)<0, 
+                                      "Decreasing at 0.01 Significance", 
+                                      ifelse(0.05 >= as.numeric(P_Value) & as.numeric(Sens_Slope)<0, 
+                                             "Decreasing at 0.05 Significance", "Not Significant")))))
 
   #colorpal <- c("#b2182b", "#ef8a62", "#fddbc7", "#2166ac", "#67a9cf", "#d1e5f0", "white")
-  colorpal <- c("#762a83", "#af8dc3", "#e7d4e8", "#1b7837", "#7fbf7b", "#d9f0d3", "white")
+  colorpal <- c("#762a83", "#af8dc3", "#1b7837", "#7fbf7b", "white")
   ggplot(data=temp_df, aes(x=site_name, y=test)) +
     geom_tile(aes(fill = sig), color = "black") +
     ggtitle(paste0("Long-term ", type ," Trends By Basin")) +
@@ -32,7 +28,8 @@ Barplot_Trends = function (df_path, type){
           axis.text.x = element_text(angle = 45, size = 10, vjust = 1, hjust=1),
           strip.background = element_rect(fill="white", colour="black"),
           strip.text.x = element_text(margin = margin(.1, 0, .1, 0, "cm"))) +
-    scale_fill_manual(name="", values = colorpal)
+    scale_fill_manual(name="", values = colorpal) +
+    geom_text(aes(label=percent_change))
   
 #  temp_df <- df %>%
 #    ungroup() %>%

@@ -97,7 +97,8 @@ Centroid <- Analysis %>%
   mutate(ave_t = mean(t_mean, na.rm=TRUE), ave_pcp = mean(pcp, na.rm=TRUE)) %>%
   distinct(PCT_bin, .keep_all = TRUE)
 
-colorpal <- c("#b2182b", "#ef8a62", "#fddbc7",  "#d1e5f0", "#67a9cf", "#2166ac")
+#colorpal <- c("#b2182b", "#ef8a62", "#fddbc7",  "#d1e5f0", "#67a9cf", "#2166ac")
+colorpal <- c("#762a83", "#af8dc3", "#e7d4e8", "#d9f0d3", "#7fbf7b", "#1b7837")
 
 ggplot() +
   geom_hline(yintercept=0) + 

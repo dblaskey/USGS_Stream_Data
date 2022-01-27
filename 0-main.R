@@ -18,6 +18,7 @@ library(modifiedmk)
 library(scales)
 library(ggrepel)
 library(ggsci)
+library(cowplot)
 
 # change directory
 my_dir <- dirname(rstudioapi::getActiveDocumentContext()$path)
@@ -31,9 +32,13 @@ my_R_files <- list.files(path='./Functions/',
 # Load all functions in R
 sapply(my_R_files, source)
 
-# Import data script
+# Run data script
 source('01-import_and_clean_data.R')
 
-# Import data visualization script
+# Run data visualization script
 source('02-Data_Visualization.R')
+
+# Run analyze data script
+source('03-Analyze_Data.R')
+
 

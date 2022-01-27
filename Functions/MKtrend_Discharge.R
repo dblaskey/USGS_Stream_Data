@@ -166,7 +166,19 @@ MKtrend_Discharge = function(path_2_data){
   }) %>%
     bind_rows()
   
-  month_trend$test = factor(month_trend$test, levels = c(month.abb[10:12], month.abb[1:9]))
+  hist_month = final_sites %>%
+      filter(wt_year <= 1989) %>%
+      group_by(site_name, Month) %>%
+      summarise(Hist_mean_Discharge = mean(X_00060_00003)) %>% 
+    mutate(test = month.abb[Month]) %>%
+    select(-Month)
+  
+  month_trend = left_join(month_trend, hist_month) %>%
+    group_by(site_name) %>%
+    #mutate(P_Value_ave = rollapply(P_Value,  FUN = mean, width = 4, fill = P_Value , align = "center")) %>%
+    mutate(percent_change = ifelse(as.numeric(P_Value <= 0.05), round(10*Sens_Slope/Hist_mean_Discharge*100, 1), NA))
+  
+  month_trend$test = factor(month_trend$test, levels = c(month.abb[1:12]))
   
   save(month_trend, file=paste0("./Data/FinalDischargeTemporal_Analyzed_Data.RData"))
   
