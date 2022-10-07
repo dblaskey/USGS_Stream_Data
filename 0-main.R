@@ -19,6 +19,7 @@ library(scales)
 library(ggrepel)
 library(ggsci)
 library(cowplot)
+library(sf)
 
 # change directory
 my_dir <- dirname(rstudioapi::getActiveDocumentContext()$path)

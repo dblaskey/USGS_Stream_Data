@@ -15,9 +15,11 @@ MKtrend_Climate("/Users/dybl4375/USGS_Stream_Data_Pull/Data/raw/climate_data_fin
 
 # Set path to analyzed data
 df_discharge_month = "./Data/FinalDischargeTemporal_Analyzed_Data.RData"
+df_discharge = "./Data/FinalDischarge_Analyzed_Data.RData"
 
 # Bar plot trends
 Barplot_Trends(df_discharge_month, "Mean Discharge")
+Barplot_Trends(df_discharge, "Discharge")
 
 # Plot Change in Hydrograph
 HGChange(df_path_raw)

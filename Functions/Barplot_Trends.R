@@ -3,6 +3,7 @@ Barplot_Trends = function (df_path, type){
   df <- loadRData(df_path)
 
   temp_df <- df %>%
+    #filter(site_name = "Yukon River") %>%
     ungroup() %>%
     mutate(sig = ifelse(0.01 >= as.numeric(P_Value) & as.numeric(Sens_Slope)>0, 
                         "Increasing at 0.01 Significance", 
@@ -13,6 +14,12 @@ Barplot_Trends = function (df_path, type){
                                       ifelse(0.05 >= as.numeric(P_Value) & as.numeric(Sens_Slope)<0, 
                                              "Decreasing at 0.05 Significance", "Not Significant")))))
 
+  temp_df$site_name = factor(temp_df$site_name, levels = 
+                               c("Nuyakuk River", "Kenai River",
+                                 "Ship Creek", "Little Susitna River", "Kuskokwim River",
+                                 "Susitna River", "Salcha River", "Chena River", "Kuparuk River"))
+  
+  
   #colorpal <- c("#b2182b", "#ef8a62", "#fddbc7", "#2166ac", "#67a9cf", "#d1e5f0", "white")
   colorpal <- c("#762a83", "#af8dc3", "#1b7837", "#7fbf7b", "white")
   ggplot(data=temp_df, aes(x=site_name, y=test)) +
@@ -20,15 +27,17 @@ Barplot_Trends = function (df_path, type){
     ggtitle(paste0("Long-term ", type ," Trends By Basin")) +
     theme_bw() +
     scale_x_discrete(expand = c(0,0)) +
-    scale_y_discrete(expand = c(0,0)) +
+    scale_y_discrete(expand = c(0,0), limits=rev) +
     theme(axis.title.x = element_blank(),
           axis.title.y = element_blank(),
+          legend.position ="bottom",
           plot.title = element_text(hjust = 0.5),
           strip.text = element_text(face="bold", size=9),
           axis.text.x = element_text(angle = 45, size = 10, vjust = 1, hjust=1),
           strip.background = element_rect(fill="white", colour="black"),
           strip.text.x = element_text(margin = margin(.1, 0, .1, 0, "cm"))) +
     scale_fill_manual(name="", values = colorpal) +
+    guides(fill=guide_legend(nrow=3,byrow=TRUE))+
     geom_text(aes(label=percent_change))
   
 #  temp_df <- df %>%
@@ -59,5 +68,5 @@ Barplot_Trends = function (df_path, type){
 #    scale_shape_manual(values=c(up_dot = 24, down_dot=25, no_dot=NA), guide="none")
   
   
-  ggsave(path = "./documents/figures/", filename=paste0("Long-term_Trends_", type), width = 7, height = 5, device="jpeg", dpi=700)
+  ggsave(path = "./documents/figures/", filename=paste0("Long-term_Trends_", type), width = 6.5, height = 6, device="jpeg", dpi=700)
 }

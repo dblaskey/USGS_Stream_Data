@@ -9,23 +9,34 @@ for(i in 1:nrow(gages)){
     sites <- rbind(sites,temp)
 }
 
+#save raw sites
+save(sites, file = "./Data/raw_sites.Rdata")
+
+# load raw sites
+load("./Data/raw_sites.Rdata")
+
 #Remove provisional data and NaNs
 sites <- sites[!grepl("P", sites$X_00060_00003_cd),]
-sites <- na.omit(sites)
+sites <- sites %>%
+  drop_na()
 
-#Create Year, wt_year, Month, and Day columns and  
-Date2wt_year(sites, "Date")
+sites = sites %>%
+  mutate(site_no = as.numeric(site_no))
 
-save(sites, file = "./Data/sites.Rdata")
+df = data.frame(Date = seq(as.Date("1971/10/01"), as.Date("2019/9/30"), "days")) %>%
+  mutate(site_no = 15896000, Q = 0, agency_cd = "USGS", X_00060_00003_cd = "A")
 
-###
-
-load("./Data/Old Data/sites.Rdata")
+sites = full_join(df, sites) %>%
+  mutate(X_00060_00003 = ifelse(is.na(X_00060_00003) == TRUE, Q, X_00060_00003)) %>%
+  select(-Q) 
 
 # Create final dataset by removing Fish Creek, Yukon, and adding Kuparuk
-site_list = read.csv("./Data/site_list.csv", header = TRUE)
+site_list = read.csv("./Data/site_list.csv", header = TRUE) 
 
 sites = left_join(site_list, sites) 
+  
+#Create Year, wt_year, Month, and Day columns and  
+Date2wt_year(sites, "Date")
 
 create_final_dataset(sites, 350, 2019)
 

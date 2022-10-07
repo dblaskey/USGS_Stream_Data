@@ -1,23 +1,21 @@
 create_final_dataset = function(df, day_crit, end_year) {
   
-  end_period <- as.Date(paste(end_year,"10-01", sep="-"))
-  
   #Constrain to the desired range of years
   temp <- df %>%
-    filter(Date<end_period)%>%
-    group_by(site_name) %>%
-    mutate(start_date = min(Date), end_date=max(Date)) %>%
-    filter(lubridate::year(end_date)==end_year)
+    filter(wt_year<=end_year & wt_year > end_year - 60) 
   
   #Create table of observations per year
   obsd <- temp %>%
-    group_by(site_name) %>%
+    group_by(site_no) %>%
     count(wt_year, name = "Yearly_obs") %>%
-    mutate(Ypass = ifelse(Yearly_obs>day_crit,1,0)) %>%
-    filter(Ypass==0)
+    mutate(Ypass = ifelse(Yearly_obs<day_crit,0,1)) %>%
+    filter(Ypass==1)
   
   #Remove lines that fail day criteria
-  final_sites <- anti_join(temp,obsd) 
+  final_sites <- left_join(temp,obsd) %>%
+    group_by(site_no) %>%
+    drop_na() %>%
+    mutate(start_date = min(Date), end_date=max(Date))
   
   data_AK <- whatNWISdata(stateCd="AK", parameterCd="00060") %>%
     distinct(site_no, .keep_all = T) %>%
